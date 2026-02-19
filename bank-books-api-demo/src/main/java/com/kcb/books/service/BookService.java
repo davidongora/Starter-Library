@@ -49,13 +49,13 @@ public class BookService {
     @LogMasked
     @Transactional
     public BookResponseDto createBook(BookRequestDto requestDto) {
-        // - Masked log – email/phoneNumber are masked here
+        log.debug("BookDto before logging: {}", MaskedObject.of(requestDto, objectMaskingService));
         log.info("Creating book: {}", MaskedObject.of(requestDto, objectMaskingService));
+        log.debug("BookDto before saving to database: {}", MaskedObject.of(requestDto, objectMaskingService));
 
         Book book = bookMapper.toEntity(requestDto);
         Book savedBook = bookRepository.save(book);
 
-        // - Response DTO is logged with masked sensitive fields
         BookResponseDto response = bookMapper.toResponse(savedBook);
         log.info("Book created successfully with id={}: {}", savedBook.getId(),
                 MaskedObject.of(response, objectMaskingService));
