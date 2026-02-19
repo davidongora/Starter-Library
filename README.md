@@ -172,7 +172,7 @@ Kcb/
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/davidongora/Starter-Library.git
 cd Kcb
 
 # 2. Build and install the starter library first
