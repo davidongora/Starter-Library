@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: bank-books-api-demo
+
+  # H2 in-memory database configuration
+  datasource:
+    url: jdbc:h2:mem:booksdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # JPA / Hibernate settings
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # H2 Web Console (useful for development)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# -----------------------------------------------
+# Bank Masking Starter Configuration
+# -----------------------------------------------
+p11:
+  masking:
+    enabled: true
+    fields:
+      - email
+      - phoneNumber
+      - ssn
+      - creditCardNumber
+      - password
+    mask-style: PARTIAL
+    mask-character: "*"
+
+# Logging configuration
+logging:
+  level:
+    com.kcb: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Swagger / SpringDoc
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
