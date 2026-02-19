@@ -435,10 +435,10 @@ public class MyDto {
 
 ### Lazy Evaluation
 ```java
-// ✅ Good: toString() only called if INFO level is enabled
+// - Good: toString() only called if INFO level is enabled
 log.info("Creating book: {}", MaskedObject.of(dto, objectMaskingService));
 
-// ❌ Bad: masking always happens regardless of log level
+//  Bad: masking always happens regardless of log level
 log.info("Creating book: " + objectMaskingService.toMaskedString(dto));
 ```
 
@@ -455,18 +455,17 @@ In production, consider setting `com.kcb: WARN` to minimize the number of masked
 
 ## Bonus Features
 
-- ✅ **Dockerfile** – Multi-stage build (Maven builder + slim JRE runtime)
-- ✅ **docker-compose** – One-command startup
-- ✅ **Swagger / OpenAPI** – Full documentation at `/swagger-ui.html`
-- ✅ **`@Mask` annotation** – Per-field style overrides
-- ✅ **`@LogMasked` annotation** – AOP-based automatic method parameter masking
-- ✅ **Performance considerations** – Lazy evaluation, reflection notes documented
-- ✅ **RFC 9457 ProblemDetail** – Standardized error responses
-- ✅ **JaCoCo 80% enforcement** – Build fails below threshold
+- - **Dockerfile** – Multi-stage build (Maven builder + slim JRE runtime)
+- - **docker-compose** – One-command startup
+- - **Swagger / OpenAPI** – Full documentation at `/swagger-ui.html`
+- - **`@Mask` annotation** – Per-field style overrides
+- - **`@LogMasked` annotation** – AOP-based automatic method parameter masking
+- - **Performance considerations** – Lazy evaluation, reflection notes documented
+- - **RFC 9457 ProblemDetail** – Standardized error responses
+- - **JaCoCo 80% enforcement** – Build fails below threshold
 
 ---
 
 ## Author
 
 Submitted for KCB Group Senior Java Spring Boot Technical Assessment  
-Contact: MCRiro@kcbgroup.com | COlwande@kcbgroup.com

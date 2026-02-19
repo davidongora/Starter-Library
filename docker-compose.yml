@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  bank-books-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bank-books-api
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-XX:MaxRAMPercentage=75.0 -XX:+UseContainerSupport
+      # Override masking config via env if needed
+      - P11_MASKING_ENABLED=true
+      - P11_MASKING_MASK_STYLE=PARTIAL
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - books-network
+
+networks:
+  books-network:
+    driver: bridge
